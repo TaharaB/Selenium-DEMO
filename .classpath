@@ -66,5 +66,6 @@
 	<classpathentry kind="lib" path="C:/selenium-java-4.15.0/lib/opentelemetry-sdk-metrics-1.28.0.jar"/>
 	<classpathentry kind="lib" path="C:/selenium-java-4.15.0/lib/opentelemetry-sdk-trace-1.28.0.jar"/>
 	<classpathentry kind="lib" path="C:/selenium-java-4.15.0/lib/opentelemetry-semconv-1.28.0-alpha.jar"/>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

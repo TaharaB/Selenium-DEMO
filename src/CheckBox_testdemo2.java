@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class CheckBox_testdemo2 {
 	public static void main(String[] args) throws InterruptedException {
@@ -15,10 +16,16 @@ public class CheckBox_testdemo2 {
 
 		// URL launch
 		System.out.println("Check  Box.");
+;
 
 		driver.navigate().to("https://demoqa.com/checkbox");
 		// Maximizes
 		driver.manage().window().maximize();
+		
+		//verify URL
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("https://demoqa.com/checkbox"));
+        System.out.println("Element URL verification: " + currentUrl);
 
 		// Find Home
 		WebElement expand = driver.findElement(By.xpath("//button[@aria-label='Toggle']"));
@@ -29,15 +36,19 @@ public class CheckBox_testdemo2 {
 		// scrolls down
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("scrollBy(0, 200)");
+		
+		
+		WebElement expand2 = driver.findElement(By.xpath("(//button[@aria-label='Toggle'])[4]"));
 
 		// find downloads
-		if(!driver.findElement(By.xpath("(//button[@aria-label='Toggle'])[4]")).isSelected()) {
+		if(expand2.isDisplayed()) {
 			// click Download
-			// print Download selected
-		WebElement expand2 = driver.findElement(By.xpath("(//button[@aria-label='Toggle'])[4]"));
-		expand2.click();
-				System.out.println("Download Selected .");
+			expand2.click();
+			System.out.println("Download Selected .");
 		}
+		
+	
+
 
 
 

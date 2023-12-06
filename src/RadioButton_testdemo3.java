@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class RadioButton_testdemo3 {
 	public static void main(String[] args) throws InterruptedException {
@@ -17,52 +18,49 @@ public class RadioButton_testdemo3 {
 		WebDriver driver = new ChromeDriver();
 
 		// Get URL
-		System.out.println("Radio Button.");
+        System.out.println("Script: Radio Button.");
+        driver.navigate().to("https://demoqa.com/radio-button");
+        driver.manage().window().maximize();
+        String currentUrl = driver.getCurrentUrl();
 
-		driver.navigate().to("https://demoqa.com/radio-button");
+        // Verify page URL
+        Assert.assertTrue(currentUrl.contains("https://demoqa.com/radio-button"));
+        System.out.println("Element URL verification: " + currentUrl);
 
-		driver.manage().window().maximize();
+        System.out.println("Button selected: ");
+        Thread.sleep(2000);
+        
+        // Scroll down
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("scrollBy(0, 200)");
+        
 
-		System.out.println("Radio button selected: ");
+        WebElement yesButton = driver.findElement(By.xpath("//label[@for=\"yesRadio\" ]"));
+        yesButton.click();
+        WebElement yesStatus = driver.findElement(By.xpath("//span[text()=\"Yes\"]"));
+        Assert.assertTrue(yesStatus.isDisplayed());
+        Assert.assertEquals(yesButton.getText() , yesStatus.getText());
+        System.out.println(yesStatus.getText());
+           
 
-		Thread.sleep(2000);
+        WebElement impressiveButton = driver.findElement(By.xpath("//label[@for=\"impressiveRadio\" ]"));
+        impressiveButton.click();
+        WebElement impressiveStatus = driver.findElement(By.xpath("//span[text()=\"Impressive\"]"));
+        Assert.assertTrue(impressiveStatus.isDisplayed());
+        Assert.assertEquals(impressiveButton.getText() , impressiveStatus.getText());
+        System.out.println(impressiveStatus.getText());
 
-		// scroll down
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("scrollBy(0, 200)");
+             
 
-		if (driver.findElement(By.xpath("//*[text()=\"Yes\"]")).isSelected() == false) {
-			// click yes
-			// print yes selected
-			driver.findElement(By.xpath("//*[text()=\"Yes\"]")).click();
-			System.out.println("Yes: selected");
-		}
+        WebElement noButton = driver.findElement(By.xpath("//label[@for=\"noRadio\" ]"));
+        Assert.assertNotNull(noButton);
+        noButton.click();
+        
+    
 
-		Thread.sleep(2000);
 
-		// determines whether the impressive is selected or not
-		if (driver.findElement(By.xpath("//*[text()=\"Impressive\"]")).isSelected() == false) {
-			// click impressive
-			// print impressive selected
-			driver.findElement(By.xpath("//*[text()=\"Impressive\"]")).click();
-			System.out.println("Impressive: selected");
+        
 
-		}
-
-		Thread.sleep(1000);
-
-		if (driver.findElement(By.xpath("//*[text()=\"No\"]")).isSelected() != false) {
-			// click no
-			// print no selected
-			driver.findElement(By.xpath("//*[text()=\"No\"]")).click();
-			System.out.println("NO selected");
-		} else {
-			System.out.println("No: cant be selected");
-		}
-
-		Thread.sleep(2000);
-
-		driver.quit();
-
-	}
+        driver.quit();
+    }
 }
